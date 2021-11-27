@@ -19,7 +19,7 @@ public class ConsoleUI {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println(userInputStr);
+            System.out.print(userInputStr);
             String line = scanner.nextLine();
             if (commandExit.equals(line)) {
                 break;

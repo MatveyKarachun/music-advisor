@@ -11,6 +11,17 @@ hs_err_pid*
 
 
 ##############################
+## Gradle
+##############################
+bin/
+build/
+.gradle
+.gradletasknamecache
+gradle-app.setting
+!gradle-wrapper.jar
+
+
+##############################
 ## IntelliJ
 ##############################
 out/
@@ -21,3 +32,8 @@ out/
 *.iws
 
 
+##############################
+## JetBrains Academy
+##############################
+course-remote-info.yaml
+*.yaml
