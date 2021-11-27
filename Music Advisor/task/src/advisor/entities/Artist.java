@@ -1,8 +1,8 @@
 package advisor.entities;
 
-public class Category extends Entity {
+public class Artist extends Entity {
 
-    public Category(String name) {
+    public Artist(String name) {
         super(name);
     }
 

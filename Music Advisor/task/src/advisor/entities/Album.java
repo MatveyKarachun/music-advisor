@@ -1,20 +1,20 @@
 package advisor.entities;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Album extends Entity {
-    private String name;
-    private String artist;
+    private List<Artist> artists;
 
-    public Album(String name, String artist) {
+    public Album(String name, List<Artist> artists) {
         super(name);
-        this.artist = artist;
-    }
-
-    public String getName() {
-        return name;
+        this.artists = new ArrayList<>(artists);
     }
 
     @Override
     public String toString() {
-        return name + " [" + artist + "]";
+        String result = getName() + " " + Arrays.toString(artists.toArray());
+        return result;
     }
 }
