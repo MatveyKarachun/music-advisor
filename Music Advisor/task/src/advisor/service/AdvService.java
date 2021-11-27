@@ -1,5 +1,5 @@
 package advisor.service;
 
-public class Service {
+public class AdvService {
 
 }
