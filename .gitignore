@@ -35,6 +35,8 @@ out/
 ##############################
 ## JetBrains Academy
 ##############################
+Topics/
+.yaml
 "Music Advisor/Strings and fiddlesticks/task-info.yaml"
 task-info.yaml
 course-remote-info.yaml

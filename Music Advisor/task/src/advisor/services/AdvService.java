@@ -1,4 +1,4 @@
-package advisor.service;
+package advisor.services;
 
 import advisor.entities.Album;
 import advisor.entities.Artist;

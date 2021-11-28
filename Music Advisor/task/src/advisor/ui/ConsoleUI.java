@@ -3,7 +3,9 @@ package advisor.ui;
 import advisor.entities.Album;
 import advisor.entities.Playlist;
 import advisor.entities.PlaylistCategory;
-import advisor.service.AdvService;
+import advisor.services.AdvService;
+import advisor.services.AuthorizationService;
+import advisor.services.AuthorizationServiceMockImpl;
 
 import java.util.List;
 import java.util.Scanner;
@@ -17,8 +19,11 @@ public class ConsoleUI {
     private static final String titleCategories = "---CATEGORIES---";
 
     private static final String messageGoodbye = "---GOODBYE!---";
+    private static final String messageSuccess = "---SUCCESS---";
+    private static final String messageProvideAccess = "Please, provide access for application.";
     private static final String messageWrongCommand = "Wrong command!";
 
+    private static final String commandAuth = "auth";
     private static final String commandNew = "new";
     private static final String commandFeatured = "featured";
     private static final String commandCategories = "categories";
@@ -26,8 +31,10 @@ public class ConsoleUI {
     private static final String commandExit = "exit";
 
     private AdvService advService;
+    private AuthorizationService authorizationService;
 
     public ConsoleUI() {
+        authorizationService = new AuthorizationServiceMockImpl();
         advService = new AdvService();
     }
 
@@ -36,7 +43,6 @@ public class ConsoleUI {
 
         boolean userWantsToExit = false;
         while (!userWantsToExit) {
-            System.out.print(userInputStr);
             String[] commandAndArg = scanner.nextLine()
                     .trim()
                     .split("\\s+", 2);
@@ -48,27 +54,36 @@ public class ConsoleUI {
             if (commandAndArg.length >= 2) {
                 arg = commandAndArg[1];
             }
-            switch (command) {
-                case commandNew:
-                    printNewReleases();
-                    break;
-                case commandFeatured:
-                    printFeatured();
-                    break;
-                case commandCategories:
-                    printCategories();
-                    break;
-                case commandPlaylists:
-                    printPlaylistsByCategory(arg);
-                    break;
-                case commandExit:
-                    userWantsToExit = true;
-                    System.out.println(messageGoodbye);
-                    break;
-                default:
-                    System.out.println(messageWrongCommand);
-                    break;
+            if (commandExit.equals(command)) {
+                userWantsToExit = true;
+                System.out.println(messageGoodbye);
+            } else if (commandAuth.equals(command)) {
+                printAuthorizationLink();
+                if (authorizationService.isAuthorized()) {
+                    System.out.println(messageSuccess);
+                }
+            } else if (!authorizationService.isAuthorized()) {
+                System.out.println(messageProvideAccess);
+            } else if (authorizationService.isAuthorized()) {
+                switch (command) {
+                    case commandNew:
+                        printNewReleases();
+                        break;
+                    case commandFeatured:
+                        printFeatured();
+                        break;
+                    case commandCategories:
+                        printCategories();
+                        break;
+                    case commandPlaylists:
+                        printPlaylistsByCategory(arg);
+                        break;
+                    default:
+                        System.out.println(messageWrongCommand);
+                        break;
+                }
             }
+
         }
     }
 
@@ -99,5 +114,9 @@ public class ConsoleUI {
         List<Playlist> playlists = advService.getPlaylistsByCategory(playlistCategory);
         System.out.println(getPlaylistsTitleWithCategory(categoryName));
         playlists.forEach(System.out::println);
+    }
+
+    private void printAuthorizationLink() {
+        System.out.println(authorizationService.getAuthorizationLink());
     }
 }
