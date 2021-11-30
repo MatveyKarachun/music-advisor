@@ -4,6 +4,7 @@ import advisor.entities.Album;
 import advisor.entities.Playlist;
 import advisor.entities.PlaylistCategory;
 import advisor.services.AdvService;
+import advisor.services.AdvServiceMockImpl;
 import advisor.services.AuthorizationService;
 import advisor.services.AuthorizationServiceMockImpl;
 
@@ -35,7 +36,7 @@ public class ConsoleUI {
 
     public ConsoleUI() {
         authorizationService = new AuthorizationServiceMockImpl();
-        advService = new AdvService();
+        advService = new AdvServiceMockImpl();
     }
 
     public void go() {
