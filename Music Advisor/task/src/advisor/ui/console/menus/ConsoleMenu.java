@@ -1,4 +1,10 @@
 package advisor.ui.console.menus;
 
-public interface ConsoleMenu {
+import java.util.Scanner;
+
+abstract class ConsoleMenu {
+
+    final Scanner scanner = new Scanner(System.in);
+
+    boolean userWantsToExit = false;
 }

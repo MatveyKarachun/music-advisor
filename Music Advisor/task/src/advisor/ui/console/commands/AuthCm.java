@@ -1,14 +1,21 @@
 package advisor.ui.console.commands;
 
 import advisor.services.AdvService;
+import advisor.services.AuthorizationService;
 
 public class AuthCm implements Command {
 
     private static final String name = "auth";
 
-    @Override
-    public void execute(AdvService advService, String... params) {
+    private final AuthorizationService authorizationService;
 
+    public AuthCm(AuthorizationService authorizationService) {
+        this.authorizationService = authorizationService;
+    }
+
+    @Override
+    public boolean execute(String... params) {
+        return authorizationService.startAuthorization();
     }
 
     @Override

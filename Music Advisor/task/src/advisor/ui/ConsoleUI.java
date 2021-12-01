@@ -60,12 +60,7 @@ public class ConsoleUI {
                 System.out.println(messageGoodbye);
             } else if (commandAuth.equals(command)) {
                 printAuthorizationLink();
-                if (authorizationService.isAuthorized()) {
                     System.out.println(messageSuccess);
-                }
-            } else if (!authorizationService.isAuthorized()) {
-                System.out.println(messageProvideAccess);
-            } else if (authorizationService.isAuthorized()) {
                 switch (command) {
                     case commandNew:
                         printNewReleases();
@@ -118,6 +113,6 @@ public class ConsoleUI {
     }
 
     private void printAuthorizationLink() {
-        System.out.println(authorizationService.getAuthorizationLink());
+        authorizationService.startAuthorization();
     }
 }

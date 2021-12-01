@@ -4,9 +4,9 @@ import advisor.services.AdvService;
 
 import java.util.Objects;
 
-interface Command {
+public interface Command {
 
-    void execute(AdvService advService, String... params);
+    boolean execute(String... params);
 
     String getName();
 

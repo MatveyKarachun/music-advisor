@@ -9,17 +9,18 @@ public class AuthorizationServiceMockImpl implements AuthorizationService {
 
     private boolean authorized = false;
 
-    @Override
-    public boolean isAuthorized() {
-        return authorized;
-    }
 
-    @Override
-    public String getAuthorizationLink() {
+    private String getAuthorizationLink() {
         authorized = true;
         return "https://" + spotifyLink + "/authorize?"
                 + "client_id=" + clientId + "&"
                 + "redirect_uri=" + redirectURI;
 
+    }
+
+    @Override
+    public boolean startAuthorization() {
+        System.out.println(getAuthorizationLink());
+        return true;
     }
 }

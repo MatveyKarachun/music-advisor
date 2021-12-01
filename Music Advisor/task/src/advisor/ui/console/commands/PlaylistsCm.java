@@ -6,20 +6,25 @@ import advisor.services.AdvService;
 
 import java.util.List;
 
-public class PlaylistsCm implements Command {
+public class PlaylistsCm extends AdvCm {
 
     private static final String name = "playlists";
 
+    public PlaylistsCm(AdvService advService) {
+        super(advService);
+    }
+
     @Override
-    public void execute(AdvService advService, String... params) {
+    public boolean execute(String... params) {
         String playlistCategoryName = "";
         if (params.length > 0) {
             playlistCategoryName = params[0];
         }
         PlaylistCategory playlistCategory = new PlaylistCategory(playlistCategoryName);
-        List<Playlist> playlists = advService.getPlaylistsByCategory(playlistCategory);
+        List<Playlist> playlists = getAdvService().getPlaylistsByCategory(playlistCategory);
         System.out.println("---" + playlistCategoryName.toUpperCase() + " PLAYLISTS---");
         playlists.forEach(System.out::println);
+        return true;
     }
 
     @Override
