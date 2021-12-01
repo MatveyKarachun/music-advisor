@@ -2,17 +2,15 @@ package advisor.ui.console.commands;
 
 import advisor.services.AdvService;
 
-abstract class Command {
+import java.util.Objects;
 
-    private final String name;
+interface Command {
 
-    Command(String name) {
-        this.name = name;
-    }
+    void execute(AdvService advService, String... params);
 
-    public abstract void execute(AdvService advService);
+    String getName();
 
-    public String getName() {
-        return name;
+    default boolean nameIs(String supposed) {
+        return Objects.equals(supposed, getName());
     }
 }
