@@ -1,16 +1,19 @@
 package advisor;
 
-import advisor.services.ServicesParams;
+import advisor.services.AbstractService;
 import advisor.ui.console.menus.EntryMenu;
-
-import java.util.Objects;
 
 public class Main {
     public static void main(String[] args) {
 
-        if (args.length >= 2 && Objects.equals("-access", args[0])) {
-            ServicesParams.setSpotifyServerPath(args[1]);
+        for (int i = 0; i < args.length - 1; i++) {
+            if ("-access".equals(args[i])) {
+                AbstractService.setAuthorizationServerPath(args[++i]);
+            } else if ("-resource".equals(args[i])) {
+                AbstractService.setApiServerPath(args[++i]);
+            }
         }
+
         new EntryMenu().Enter();
     }
 }

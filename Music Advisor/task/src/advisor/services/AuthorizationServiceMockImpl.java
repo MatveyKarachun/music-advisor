@@ -1,6 +1,6 @@
 package advisor.services;
 
-public class AuthorizationServiceMockImpl implements AuthorizationService {
+public class AuthorizationServiceMockImpl extends AbstractService implements AuthorizationService {
 
     private static final String spotifyLink = "accounts.spotify.com";
     private static final String redirectURI = "http://localhost:8080&response_type=code";
@@ -19,8 +19,8 @@ public class AuthorizationServiceMockImpl implements AuthorizationService {
     }
 
     @Override
-    public boolean startAuthorization() {
+    public String startAuthorization() {
         System.out.println(getAuthorizationLink());
-        return true;
+        return null;
     }
 }

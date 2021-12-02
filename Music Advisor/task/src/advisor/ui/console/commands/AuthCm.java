@@ -15,7 +15,8 @@ public class AuthCm implements Command {
 
     @Override
     public boolean execute(String... params) {
-        return authorizationService.startAuthorization();
+        authorizationService.startAuthorization();
+        return true;
     }
 
     @Override

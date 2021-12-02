@@ -8,7 +8,7 @@ import advisor.entities.PlaylistCategory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdvServiceMockImpl implements AdvService {
+public class AdvServiceMockImpl extends AbstractService implements AdvService {
 
     public List<Playlist> getFeaturedPlaylists() {
         List<Playlist> featuredPlaylists = new ArrayList<>();
