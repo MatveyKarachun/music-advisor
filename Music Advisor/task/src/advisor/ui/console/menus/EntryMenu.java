@@ -11,6 +11,7 @@ public class EntryMenu extends ConsoleMenu {
 
     private Command authCm;
     private Command exitCm;
+    private boolean userWantsToExit;
 
     public EntryMenu() {
         authCm = new AuthCm(new AuthorizationServiceImpl());

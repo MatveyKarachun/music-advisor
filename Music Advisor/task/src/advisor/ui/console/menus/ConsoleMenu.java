@@ -6,5 +6,4 @@ abstract class ConsoleMenu {
 
     final Scanner scanner = new Scanner(System.in);
 
-    boolean userWantsToExit = false;
 }

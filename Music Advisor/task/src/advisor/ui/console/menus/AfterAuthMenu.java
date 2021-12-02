@@ -9,6 +9,7 @@ import java.util.List;
 public class AfterAuthMenu extends ConsoleMenu {
 
     private final AdvService advService = new AdvServiceMockImpl();
+    private boolean userWantsToExit;
 
     private final Iterable<Command> availableCommands = List.of(new CategoriesCm(advService),
             new FeaturedCm(advService),
