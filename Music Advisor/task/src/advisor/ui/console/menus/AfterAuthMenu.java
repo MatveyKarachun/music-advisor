@@ -6,18 +6,21 @@ import advisor.ui.console.commands.*;
 
 import java.util.List;
 
-public class AfterAuthMenu extends ConsoleMenu {
+class AfterAuthMenu extends ConsoleMenu {
 
-    private final AdvService advService = new AdvServiceMockImpl();
+    private final AdvService advService;
+    private final Iterable<Command> availableCommands;
 
-    private final Iterable<Command> availableCommands = List.of(new CategoriesCm(advService),
-            new FeaturedCm(advService),
-            new NewCm(advService),
-            new PlaylistsCm(advService),
-            new ExitCm());
+    AfterAuthMenu(AdvService advService) {
+        this.advService = advService;
+        availableCommands = List.of(new CategoriesCm(advService),
+                new FeaturedCm(advService),
+                new NewCm(advService),
+                new PlaylistsCm(advService),
+                new ExitCm());
+    }
 
-
-    public void Enter() {
+    void Enter() {
         userWantsToExit = false;
         while (!userWantsToExit) {
 

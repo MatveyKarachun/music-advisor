@@ -1,16 +1,14 @@
 package advisor.services;
 
 import advisor.entities.Album;
-import advisor.entities.Artist;
 import advisor.entities.Playlist;
-import advisor.entities.PlaylistCategory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdvServiceMockImpl extends AbstractService implements AdvService {
+public class AdvServiceMockImpl extends AbstractService /*implements AdvService*/ {
 
-    public List<Playlist> getFeaturedPlaylists() {
+/*    public List<Playlist> getFeaturedPlaylists() {
         List<Playlist> featuredPlaylists = new ArrayList<>();
         featuredPlaylists.add(new Playlist("Mellow Morning"));
         featuredPlaylists.add(new Playlist("Wake Up and Smell the Coffee"));
@@ -48,5 +46,7 @@ public class AdvServiceMockImpl extends AbstractService implements AdvService {
         playlists.add(new Playlist("Arab Mood Booster "));
         playlists.add(new Playlist("Sunday Stroll"));
         return playlists;
-    }
+    }*/
+
+
 }

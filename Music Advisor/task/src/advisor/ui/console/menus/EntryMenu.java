@@ -1,5 +1,6 @@
 package advisor.ui.console.menus;
 
+import advisor.services.AdvServiceImpl;
 import advisor.services.AuthorizationServiceImpl;
 import advisor.ui.console.commands.AuthCm;
 import advisor.ui.console.commands.Command;
@@ -9,7 +10,7 @@ import java.util.Objects;
 
 public class EntryMenu extends ConsoleMenu {
 
-    private Command authCm;
+    private AuthCm authCm;
     private Command exitCm;
 
 
@@ -28,8 +29,8 @@ public class EntryMenu extends ConsoleMenu {
                 exitCm.execute();
                 userWantsToExit = true;
             } else if (Objects.equals(inputCommandStr, authCm.getName())) {
-                if (authCm.execute()) {
-                    new AfterAuthMenu().Enter();
+                if (authCm.execute() && !authCm.getAccessToken().isEmpty()) {
+                    new AfterAuthMenu(new AdvServiceImpl(authCm.getAccessToken())).Enter();
                     userWantsToExit = true;
                 }
             } else {

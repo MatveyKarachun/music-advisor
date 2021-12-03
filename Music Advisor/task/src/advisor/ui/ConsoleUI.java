@@ -2,7 +2,6 @@ package advisor.ui;
 
 import advisor.entities.Album;
 import advisor.entities.Playlist;
-import advisor.entities.PlaylistCategory;
 import advisor.services.AdvService;
 import advisor.services.AdvServiceMockImpl;
 import advisor.services.AuthorizationService;
@@ -13,7 +12,7 @@ import java.util.Scanner;
 
 public class ConsoleUI {
 
-    private static final String userInputStr = "> ";
+/*    private static final String userInputStr = "> ";
 
     private static final String titleNewReleases = "---NEW RELEASES---";
     private static final String titleFeatured = "---FEATURED---";
@@ -114,5 +113,5 @@ public class ConsoleUI {
 
     private void printAuthorizationLink() {
         authorizationService.startAuthorization();
-    }
+    }*/
 }

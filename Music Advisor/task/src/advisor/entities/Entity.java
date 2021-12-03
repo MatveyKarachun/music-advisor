@@ -1,33 +1,24 @@
 package advisor.entities;
 
-import java.util.Objects;
-
 public abstract class Entity {
-    private String name;
 
-    Entity(String name) {
+    private String name;
+    private String href;
+
+    Entity(String name, String href) {
         this.name = name;
+        this.href = href;
     }
 
     public String getName() {
         return name;
     }
 
-    @Override
-    public String toString() {
-        return name;
-    };
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Entity entity = (Entity) o;
-        return Objects.equals(name, entity.name);
+    public String getHref() {
+        return href;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
+    public abstract String toString();
+
 }

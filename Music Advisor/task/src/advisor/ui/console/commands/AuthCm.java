@@ -1,6 +1,5 @@
 package advisor.ui.console.commands;
 
-import advisor.services.AdvService;
 import advisor.services.AuthorizationService;
 
 public class AuthCm implements Command {
@@ -9,18 +8,24 @@ public class AuthCm implements Command {
 
     private final AuthorizationService authorizationService;
 
+    private String accessToken = "";
+
     public AuthCm(AuthorizationService authorizationService) {
         this.authorizationService = authorizationService;
     }
 
     @Override
     public boolean execute(String... params) {
-        authorizationService.startAuthorization();
+        accessToken = authorizationService.startAuthorization();
         return true;
     }
 
     @Override
     public String getName() {
         return name;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
     }
 }
