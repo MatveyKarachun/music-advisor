@@ -17,7 +17,7 @@ import java.util.Objects;
 
 public class AdvServiceImpl extends AbstractService implements AdvService {
 
-    private String accessToken ;
+    private String accessToken;
 
     public AdvServiceImpl(String accessToken) {
         this.accessToken = accessToken;
@@ -25,7 +25,11 @@ public class AdvServiceImpl extends AbstractService implements AdvService {
 
     @Override
     public List<Playlist> getFeaturedPlaylists() throws IOException, InterruptedException {
-        return getPlaylistsByUri(getApiServerPath() + "/v1/browse/featured-playlists");
+        JsonElement jsonElement = makeRequest(getApiServerPath() + "/v1/browse/featured-playlists");
+        if (jsonElement == null) {
+            return null;
+        }
+        return getPlaylistsByJsonElem(jsonElement);
     }
 
     @Override
@@ -93,26 +97,10 @@ public class AdvServiceImpl extends AbstractService implements AdvService {
                     .getAsString();
             throw new Exception(message);
         }
-        JsonArray playlistsJsonArr = jsonElement.getAsJsonObject()
-                .getAsJsonObject("playlists")
-                .getAsJsonArray("items");
-        List<Playlist> playlists = new ArrayList<>(playlistsJsonArr.size());
-        for (JsonElement playlistJson : playlistsJsonArr) {
-            String playlistName = playlistJson.getAsJsonObject().get("name").getAsString();
-            String playlistHref = playlistJson.getAsJsonObject()
-                    .getAsJsonObject("external_urls")
-                    .get("spotify")
-                    .getAsString();
-            playlists.add(new Playlist(playlistName, playlistHref));
-        }
-        return playlists;
+        return getPlaylistsByJsonElem(jsonElement);
     }
 
-    private List<Playlist> getPlaylistsByUri(String uriStr) throws IOException, InterruptedException {
-        JsonElement jsonElement = makeRequest(uriStr);
-        if (jsonElement == null) {
-            return null;
-        }
+    private List<Playlist> getPlaylistsByJsonElem(JsonElement jsonElement) {
         JsonArray playlistsJsonArr = jsonElement.getAsJsonObject()
                 .getAsJsonObject("playlists")
                 .getAsJsonArray("items");
