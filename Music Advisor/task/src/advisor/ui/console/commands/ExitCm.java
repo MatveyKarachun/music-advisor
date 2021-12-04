@@ -6,7 +6,6 @@ public class ExitCm implements Command {
 
     @Override
     public boolean execute(String... params) {
-        System.out.println("---GOODBYE!---");
         return true;
     }
 

@@ -24,7 +24,6 @@ public class CategoriesCm extends AdvCm {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("---CATEGORIES---");
         categories.forEach(System.out::println);
         return true;
     }

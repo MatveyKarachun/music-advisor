@@ -18,8 +18,10 @@ public class NewCm extends AdvCm {
     public boolean execute(String... params) {
         try {
             List<Album> releases = getAdvService().getNewReleases();
-            System.out.println("---NEW RELEASES---");
-            releases.forEach(System.out::println);
+            releases.forEach(r -> {
+                System.out.println(r);
+                System.out.println();
+            });
             return true;
         } catch (IOException e) {
             e.printStackTrace();

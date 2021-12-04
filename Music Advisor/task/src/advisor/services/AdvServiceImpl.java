@@ -17,7 +17,7 @@ import java.util.Objects;
 
 public class AdvServiceImpl extends AbstractService implements AdvService {
 
-    private String accessToken = "";
+    private String accessToken ;
 
     public AdvServiceImpl(String accessToken) {
         this.accessToken = accessToken;
@@ -25,10 +25,7 @@ public class AdvServiceImpl extends AbstractService implements AdvService {
 
     @Override
     public List<Playlist> getFeaturedPlaylists() throws IOException, InterruptedException {
-        JsonElement jsonElement = makeRequest(getApiServerPath() + "/v1/browse/new-releases");
-
-
-        return null;
+        return getPlaylistsByUri(getApiServerPath() + "/v1/browse/featured-playlists");
     }
 
     @Override
@@ -70,7 +67,7 @@ public class AdvServiceImpl extends AbstractService implements AdvService {
     }
 
     @Override
-    public List<Playlist> getPlaylistsByCategory(String category) throws IOException, InterruptedException {
+    public List<Playlist> getPlaylistsByCategory(String category) throws Exception {
         JsonElement jsonElement = makeRequest(getApiServerPath() + "/v1/browse/categories");
         JsonArray categoriesJsonArr = jsonElement.getAsJsonObject()
                 .getAsJsonObject("categories")
@@ -87,7 +84,15 @@ public class AdvServiceImpl extends AbstractService implements AdvService {
         if (!categoryFound) {
             return null;
         }
+
         jsonElement = makeRequest(getApiServerPath() + "/v1/browse/categories/" + categoryId + "/playlists");
+        if (jsonElement.getAsJsonObject().has("error")) {
+            String message = jsonElement.getAsJsonObject()
+                    .getAsJsonObject("error")
+                    .get("message")
+                    .getAsString();
+            throw new Exception(message);
+        }
         JsonArray playlistsJsonArr = jsonElement.getAsJsonObject()
                 .getAsJsonObject("playlists")
                 .getAsJsonArray("items");
@@ -103,11 +108,31 @@ public class AdvServiceImpl extends AbstractService implements AdvService {
         return playlists;
     }
 
-    private JsonElement makeRequest(String UriStr) throws IOException, InterruptedException {
+    private List<Playlist> getPlaylistsByUri(String uriStr) throws IOException, InterruptedException {
+        JsonElement jsonElement = makeRequest(uriStr);
+        if (jsonElement == null) {
+            return null;
+        }
+        JsonArray playlistsJsonArr = jsonElement.getAsJsonObject()
+                .getAsJsonObject("playlists")
+                .getAsJsonArray("items");
+        List<Playlist> playlists = new ArrayList<>(playlistsJsonArr.size());
+        for (JsonElement playlistJson : playlistsJsonArr) {
+            String playlistName = playlistJson.getAsJsonObject().get("name").getAsString();
+            String playlistHref = playlistJson.getAsJsonObject()
+                    .getAsJsonObject("external_urls")
+                    .get("spotify")
+                    .getAsString();
+            playlists.add(new Playlist(playlistName, playlistHref));
+        }
+        return playlists;
+    }
+
+    private JsonElement makeRequest(String uriStr) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newBuilder().build();
         HttpRequest request = HttpRequest.newBuilder()
                 .header("Authorization", "Bearer " + accessToken)
-                .uri(URI.create(UriStr))
+                .uri(URI.create(uriStr))
                 .GET()
                 .build();
         HttpResponse<String> response;

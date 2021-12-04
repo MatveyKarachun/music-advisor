@@ -31,7 +31,6 @@ public class AuthorizationServiceImpl extends AbstractService implements Authori
 
     public String startAuthorization() {
         HttpServer server;
-
         try {
             server = HttpServer.create();
         } catch (IOException e) {
@@ -46,7 +45,6 @@ public class AuthorizationServiceImpl extends AbstractService implements Authori
             e.printStackTrace();
             return null;
         }
-
         server.createContext("/",
                 httpExchange -> {
                     String query = httpExchange.getRequestURI().getQuery();
@@ -67,7 +65,6 @@ public class AuthorizationServiceImpl extends AbstractService implements Authori
                     httpExchange.getResponseBody().close();
                 }
         );
-
         server.start();
         System.out.println("use this link to request the access code:");
         printAuthorizationLink();
@@ -112,11 +109,8 @@ public class AuthorizationServiceImpl extends AbstractService implements Authori
             return null;
         }
 
-        System.out.println("response:");
-        System.out.println(response.body());
         String accessToken = null;
         if (response.statusCode() == 200) {
-            System.out.println("---SUCCESS---");
             JsonObject jo = JsonParser.parseString(response.body()).getAsJsonObject();
             accessToken = jo.get("access_token").getAsString();
         }

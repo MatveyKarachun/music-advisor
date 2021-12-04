@@ -27,13 +27,18 @@ public class PlaylistsCm extends AdvCm {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
         }
         if (playlists == null) {
             System.out.println("Unknown category name.");
             return false;
         } else {
-            System.out.println("---" + playlistCategoryName.toUpperCase() + " PLAYLISTS---");
-            playlists.forEach(System.out::println);
+            playlists.forEach(p -> {
+                System.out.println(p);
+                System.out.println();
+            });
             return true;
         }
     }

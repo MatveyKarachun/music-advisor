@@ -16,11 +16,13 @@ public class FeaturedCm extends AdvCm {
 
     @Override
     public boolean execute(String... params) {
-        List<Playlist> playlists = null;
+        List<Playlist> playlists;
         try {
             playlists = getAdvService().getFeaturedPlaylists();
-            System.out.println("---FEATURED---");
-            playlists.forEach(System.out::println);
+            playlists.forEach(p -> {
+                System.out.println(p);
+                System.out.println();
+            });
             return true;
         } catch (IOException e) {
             e.printStackTrace();

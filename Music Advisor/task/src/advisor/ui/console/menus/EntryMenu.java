@@ -27,6 +27,7 @@ public class EntryMenu extends ConsoleMenu {
                 userWantsToExit = true;
             } else if (Objects.equals(inputCommandStr, authCm.getName())) {
                 if (authCm.execute() && !authCm.getAccessToken().isEmpty()) {
+                    System.out.println("Success!");
                     new AfterAuthMenu(new AdvServiceImpl(authCm.getAccessToken())).Enter();
                     userWantsToExit = true;
                 }
