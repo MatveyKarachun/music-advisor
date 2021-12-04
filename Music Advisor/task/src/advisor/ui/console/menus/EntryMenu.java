@@ -13,17 +13,14 @@ public class EntryMenu extends ConsoleMenu {
     private AuthCm authCm;
     private Command exitCm;
 
-
     public EntryMenu() {
         authCm = new AuthCm(new AuthorizationServiceImpl());
         exitCm = new ExitCm();
     }
 
     public void Enter() {
-
         userWantsToExit = false;
         while (!userWantsToExit) {
-
             String inputCommandStr = scanner.nextLine();
             if (Objects.equals(inputCommandStr, exitCm.getName())) {
                 exitCm.execute();

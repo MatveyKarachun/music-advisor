@@ -1,9 +1,13 @@
 package advisor.entities;
 
-public abstract class Entity {
+abstract class Entity {
 
-    private String name;
+    private final String name;
     private String href;
+
+    Entity(String name) {
+        this.name = name;
+    }
 
     Entity(String name, String href) {
         this.name = name;
@@ -18,7 +22,10 @@ public abstract class Entity {
         return href;
     }
 
+    public void setHref(String href) {
+        this.href = href;
+    }
+
     @Override
     public abstract String toString();
-
 }

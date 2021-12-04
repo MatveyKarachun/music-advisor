@@ -1,8 +1,9 @@
 package advisor.ui.console.commands;
 
-import advisor.entities.PlaylistCategory;
+
 import advisor.services.AdvService;
 
+import java.io.IOException;
 import java.util.List;
 
 public class CategoriesCm extends AdvCm {
@@ -15,7 +16,14 @@ public class CategoriesCm extends AdvCm {
 
     @Override
     public boolean execute(String... params) {
-        List<PlaylistCategory> categories = getAdvService().getCategories();
+        List<String> categories = null;
+        try {
+            categories = getAdvService().getCategories();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println("---CATEGORIES---");
         categories.forEach(System.out::println);
         return true;

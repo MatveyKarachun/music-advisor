@@ -18,8 +18,6 @@ public class AuthorizationServiceImpl extends AbstractService implements Authori
     private static final String redirectURI = "http://localhost:8080";
     private String authorizationCode = "";
 
-    private String accessToken = "";
-
     private static String getAuthorizationLink() {
         return AbstractService.getAuthorizationServerPath() + "/authorize?"
                 + "client_id=" + clientId + "&"
@@ -116,6 +114,7 @@ public class AuthorizationServiceImpl extends AbstractService implements Authori
 
         System.out.println("response:");
         System.out.println(response.body());
+        String accessToken = null;
         if (response.statusCode() == 200) {
             System.out.println("---SUCCESS---");
             JsonObject jo = JsonParser.parseString(response.body()).getAsJsonObject();
@@ -123,6 +122,5 @@ public class AuthorizationServiceImpl extends AbstractService implements Authori
         }
         return accessToken;
     }
-
 
 }
