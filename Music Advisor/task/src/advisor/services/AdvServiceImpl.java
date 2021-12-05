@@ -125,7 +125,6 @@ public class AdvServiceImpl extends AbstractService implements AdvService {
                 .build();
         HttpResponse<String> response;
         response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        //System.out.println(response.body());
         return JsonParser.parseString(response.body());
     }
 

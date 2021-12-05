@@ -19,11 +19,7 @@ public class FeaturedCm extends AdvCm {
         List<Playlist> playlists;
         try {
             playlists = getAdvService().getFeaturedPlaylists();
-            playlists.forEach(p -> {
-                System.out.println(p);
-                System.out.println();
-            });
-            return true;
+
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -31,6 +27,11 @@ public class FeaturedCm extends AdvCm {
             e.printStackTrace();
             return false;
         }
+        playlists.forEach(p -> {
+            System.out.println(p);
+            System.out.println();
+        });
+        return true;
     }
 
     @Override
