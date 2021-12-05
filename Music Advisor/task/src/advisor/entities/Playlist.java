@@ -9,6 +9,6 @@ public class Playlist extends Entity {
     @Override
     public String toString() {
         return getName() + "\n"
-                + getHref();
+                + getHref() + "\n";
     }
 }

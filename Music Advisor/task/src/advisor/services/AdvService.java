@@ -14,5 +14,6 @@ public interface AdvService  {
 
     List<String> getCategories() throws IOException, InterruptedException;
 
-    List<Playlist> getPlaylistsByCategory(String playlistsCategory) throws Exception;
+    List<Playlist> getPlaylistsByCategory(String playlistsCategory)
+            throws IOException, InterruptedException, JsonHasErrorMessageException;
 }

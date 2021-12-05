@@ -71,7 +71,8 @@ public class AdvServiceImpl extends AbstractService implements AdvService {
     }
 
     @Override
-    public List<Playlist> getPlaylistsByCategory(String category) throws Exception {
+    public List<Playlist> getPlaylistsByCategory(String category)
+            throws IOException, InterruptedException, JsonHasErrorMessageException {
         JsonElement jsonElement = makeRequest(getApiServerPath() + "/v1/browse/categories");
         JsonArray categoriesJsonArr = jsonElement.getAsJsonObject()
                 .getAsJsonObject("categories")
@@ -95,7 +96,7 @@ public class AdvServiceImpl extends AbstractService implements AdvService {
                     .getAsJsonObject("error")
                     .get("message")
                     .getAsString();
-            throw new Exception(message);
+            throw new JsonHasErrorMessageException(message);
         }
         return getPlaylistsByJsonElem(jsonElement);
     }

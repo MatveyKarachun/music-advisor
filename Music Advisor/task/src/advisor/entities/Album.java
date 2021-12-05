@@ -21,6 +21,6 @@ public class Album extends Entity {
     public String toString() {
         return getName() + "\n"
                 + Arrays.toString(artists.toArray()) + "\n"
-                + getHref();
+                + getHref() + "\n";
     }
 }

@@ -20,17 +20,11 @@ public class FeaturedCm extends AdvCm {
         try {
             playlists = getAdvService().getFeaturedPlaylists();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             return false;
         }
-        playlists.forEach(p -> {
-            System.out.println(p);
-            System.out.println();
-        });
+        playlists.forEach(System.out::println);
         return true;
     }
 

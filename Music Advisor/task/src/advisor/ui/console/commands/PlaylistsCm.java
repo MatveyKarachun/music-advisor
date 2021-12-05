@@ -2,6 +2,7 @@ package advisor.ui.console.commands;
 
 import advisor.entities.Playlist;
 import advisor.services.AdvService;
+import advisor.services.JsonHasErrorMessageException;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,7 +28,7 @@ public class PlaylistsCm extends AdvCm {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        } catch (Exception e) {
+        } catch (JsonHasErrorMessageException e) {
             System.out.println(e.getMessage());
             return false;
         }
