@@ -1,7 +1,5 @@
 package advisor.ui.console.commands;
 
-import advisor.services.AdvService;
-
 import java.util.Objects;
 
 public interface Command {

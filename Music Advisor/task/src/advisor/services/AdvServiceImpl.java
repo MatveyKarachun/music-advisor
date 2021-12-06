@@ -84,6 +84,7 @@ public class AdvServiceImpl extends AbstractService implements AdvService {
             if (Objects.equals(category, categoryName)) {
                 categoryId = categoryJson.getAsJsonObject().get("id").getAsString();
                 categoryFound = true;
+                break;
             }
         }
         if (!categoryFound) {

@@ -1,6 +1,7 @@
 package advisor.ui.console.menus;
 
 import advisor.services.AdvService;
+import advisor.ui.console.PaginationView;
 import advisor.ui.console.commands.*;
 
 import java.util.List;
@@ -8,12 +9,16 @@ import java.util.List;
 class AfterAuthMenu extends ConsoleMenu {
 
     private final Iterable<Command> availableCommands;
+    private final PaginationView paginationView;
 
     AfterAuthMenu(AdvService advService) {
-        availableCommands = List.of(new CategoriesCm(advService),
-                new FeaturedCm(advService),
-                new NewCm(advService),
-                new PlaylistsCm(advService),
+        paginationView = new PaginationView();
+        availableCommands = List.of(new CategoriesCm(advService, paginationView),
+                new FeaturedCm(advService, paginationView),
+                new NewCm(advService, paginationView),
+                new PlaylistsCm(advService, paginationView),
+                new NextCm(paginationView),
+                new PrevCm(paginationView),
                 new ExitCm());
     }
 

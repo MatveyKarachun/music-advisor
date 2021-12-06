@@ -2,6 +2,7 @@ package advisor.ui.console.commands;
 
 import advisor.entities.Album;
 import advisor.services.AdvService;
+import advisor.ui.console.PaginationView;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,26 +11,22 @@ public class NewCm extends AdvCm {
 
     private static final String name = "new";
 
-    public NewCm(AdvService advService){
-        super(advService);
+    public NewCm(AdvService advService, PaginationView paginationView){
+        super(advService, paginationView);
     }
 
     @Override
     public boolean execute(String... params) {
+        List releases;
         try {
-            List<Album> releases = getAdvService().getNewReleases();
-            releases.forEach(r -> {
-                System.out.println(r);
-                System.out.println();
-            });
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        } catch (InterruptedException e) {
+            releases = getAdvService().getNewReleases();
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             return false;
         }
+        getPaginationView().setData(releases);
+        printPage();
+        return true;
     }
 
     @Override
