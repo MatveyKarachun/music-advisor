@@ -8,7 +8,7 @@ Authorization in Spotify proceeds via the OAuth 2.0 protocol.
 Responses from the Spotify API come in JSON format.
 Then responses are parsed by GSON library. 
 
-###Usage
+### Usage
 This is a console application, so user interacts with an application by commands.
 Firstly, the user needs to authorize (provide the application rights to use some data of his Spotify account). 
 He uses console command "auth" for this. The application will output an authorization link. 
